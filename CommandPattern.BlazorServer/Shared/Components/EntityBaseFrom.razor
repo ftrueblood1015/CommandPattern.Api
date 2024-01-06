@@ -1,0 +1,20 @@
+﻿@using CommandPattern.BlazorServer.Shared;
+@using CommandPattern.Domain.Entities.Mtg;
+@using CommandPattern.Domain.Entities;
+
+<MudGrid>
+    <MudItem xs="12" md="12" lg="12">
+        <MudCheckBox @bind-Value="Entity.IsActive" @attributes="@Splats.CheckBox(nameof(Entity.IsActive))" For="@(() => Entity.IsActive)" />
+    </MudItem>
+    <MudItem xs="12" md="12" lg="12">
+        <MudTextField @bind-Value="Entity.Name" @attributes="@Splats.TextRequired(nameof(Entity.Name))" For="@(() => Entity.Name)" />
+    </MudItem>
+    <MudItem xs="12" md="12" lg="12">
+        <MudTextField @bind-Value="Entity.Description" @attributes="@Splats.TextRequired(nameof(Entity.Description))" For="@(() => Entity.Description)" />
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter]
+    public EntityBase Entity { get; set; } = new EntityBase();
+}
