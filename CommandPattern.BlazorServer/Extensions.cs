@@ -61,5 +61,10 @@ namespace CommandPattern.BlazorServer
                     return value ?? throw new ArgumentNullException(nameof(value));
             }
         }
+
+        public static string RemoveWhiteSpaces(this string value)
+        {
+            return value.Trim().Replace(" ", string.Empty);
+        }
     }
 }
