@@ -1,4 +1,4 @@
-﻿using CommandPattern.Api.Repositories.Mtg;
+﻿using CommandPattern.Api.Repositories.Mtg.Sets;
 using CommandPattern.Domain.Entities.Mtg;
 using CommandPattern.Domain.Repositories;
 

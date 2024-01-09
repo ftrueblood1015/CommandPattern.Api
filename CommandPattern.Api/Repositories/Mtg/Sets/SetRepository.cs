@@ -2,7 +2,7 @@
 using CommandPattern.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace CommandPattern.Api.Repositories.Mtg
+namespace CommandPattern.Api.Repositories.Mtg.Sets
 {
     public class SetRepository : RepositoryBase<Set, CommandPatternContext>, ISetRepository
     {

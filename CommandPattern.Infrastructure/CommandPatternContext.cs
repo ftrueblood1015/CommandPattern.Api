@@ -9,6 +9,7 @@ namespace CommandPattern.Infrastructure
 
         public DbSet<Domain.Entities.Mtg.Set> Sets => Set<Domain.Entities.Mtg.Set>();
         public DbSet<CardType> CardTypes => Set<CardType>();
+        public DbSet<ColorIdentity> ColorIdentities => Set<ColorIdentity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,15 @@ namespace CommandPattern.Infrastructure
                 new CardType { Id = 5, Description = "Instant", IsActive = true, Name = "Instant" },
                 new CardType { Id = 6, Description = "Sorcery", IsActive = true, Name = "Sorcery" },
                 new CardType { Id = 7, Description = "Enchantment", IsActive = true, Name = "Enchantment" }
+            );
+
+            modelBuilder.Entity<ColorIdentity>().HasData(
+                new ColorIdentity { Id = 1, Description = "Green", IsActive = true, Name = "G" },
+                new ColorIdentity { Id = 2, Description = "Black", IsActive = true, Name = "B" },
+                new ColorIdentity { Id = 3, Description = "Red", IsActive = true, Name = "R" },
+                new ColorIdentity { Id = 4, Description = "Blue", IsActive = true, Name = "U" },
+                new ColorIdentity { Id = 5, Description = "White", IsActive = true, Name = "W" },
+                new ColorIdentity { Id = 6, Description = "Colorless", IsActive = true, Name = "-" }
             );
         }
     }
