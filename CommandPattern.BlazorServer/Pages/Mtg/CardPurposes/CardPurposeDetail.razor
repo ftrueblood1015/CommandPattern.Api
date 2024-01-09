@@ -1,0 +1,21 @@
+﻿@page "/cardpurpose"
+@page "/cardpurpose/{EntityId:int}"
+
+@using CommandPattern.BlazorServer.Shared.Components;
+@using CommandPattern.BlazorServer.Shared;
+@using CommandPattern.Domain.Entities.Mtg;
+
+@inherits DetailPageBase<CardPurpose>;
+
+<MudText @attributes='Splats.PageHeader("CardPurposeDetail")'>Card Type Detail</MudText>
+
+<MudForm @ref="Form" @bind-IsValid="@success">
+    <MudPaper Class="pa-4">
+        <EntityBaseFrom Entity="@Entity"></EntityBaseFrom>
+    </MudPaper>
+    <MudPaper Class="pa-4">
+        <MudButton @attributes="Splats.NewButton()" OnClick="@(() => Save(Entity!, "cardpurposes"))">Save</MudButton>
+        <MudButton @attributes="Splats.ResetButton()" OnClick="@(()=>Form!.ResetAsync())" Class="mx-2">Reset</MudButton>
+        <MudButton @attributes="Splats.CancelButton()" OnClick="@(() => Cancel("cardpurposes"))">Cancel</MudButton>
+    </MudPaper>
+</MudForm>

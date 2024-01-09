@@ -11,6 +11,7 @@ namespace CommandPattern.Infrastructure
         public DbSet<CardType> CardTypes => Set<CardType>();
         public DbSet<ColorIdentity> ColorIdentities => Set<ColorIdentity>();
         public DbSet<Rarity> Rarities => Set<Rarity>();
+        public DbSet<CardPurpose> CardPurposes => Set<CardPurpose>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +45,13 @@ namespace CommandPattern.Infrastructure
                 new Rarity { Id = 2, Description = "Uncommon", IsActive = true, Name = "U" },
                 new Rarity { Id = 3, Description = "Rare", IsActive = true, Name = "R" },
                 new Rarity { Id = 4, Description = "legendary", IsActive = true, Name = "U" }
+            );
+
+            modelBuilder.Entity<CardPurpose>().HasData(
+                new CardPurpose { Id = 1, Description = "Mana Production", IsActive = true, Name = "Mana Production" },
+                new CardPurpose { Id = 2, Description = "Creature Removal", IsActive = true, Name = "Creature Removal" },
+                new CardPurpose { Id = 3, Description = "Enchantment Removal", IsActive = true, Name = "Enchantment Removal" },
+                new CardPurpose { Id = 4, Description = "Artifact Removal", IsActive = true, Name = "Artifact Removal" }
             );
         }
     }
