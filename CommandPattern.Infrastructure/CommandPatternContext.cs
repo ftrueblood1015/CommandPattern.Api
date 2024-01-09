@@ -10,6 +10,7 @@ namespace CommandPattern.Infrastructure
         public DbSet<Domain.Entities.Mtg.Set> Sets => Set<Domain.Entities.Mtg.Set>();
         public DbSet<CardType> CardTypes => Set<CardType>();
         public DbSet<ColorIdentity> ColorIdentities => Set<ColorIdentity>();
+        public DbSet<Rarity> Rarities => Set<Rarity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +37,13 @@ namespace CommandPattern.Infrastructure
                 new ColorIdentity { Id = 4, Description = "Blue", IsActive = true, Name = "U" },
                 new ColorIdentity { Id = 5, Description = "White", IsActive = true, Name = "W" },
                 new ColorIdentity { Id = 6, Description = "Colorless", IsActive = true, Name = "-" }
+            );
+
+            modelBuilder.Entity<Rarity>().HasData(
+                new Rarity { Id = 1, Description = "Common", IsActive = true, Name = "C" },
+                new Rarity { Id = 2, Description = "Uncommon", IsActive = true, Name = "U" },
+                new Rarity { Id = 3, Description = "Rare", IsActive = true, Name = "R" },
+                new Rarity { Id = 4, Description = "legendary", IsActive = true, Name = "U" }
             );
         }
     }
