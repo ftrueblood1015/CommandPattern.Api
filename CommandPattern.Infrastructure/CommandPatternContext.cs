@@ -13,6 +13,7 @@ namespace CommandPattern.Infrastructure
         public DbSet<Rarity> Rarities => Set<Rarity>();
         public DbSet<CardPurpose> CardPurposes => Set<CardPurpose>();
         public DbSet<Theme> Themes => Set<Theme>();
+        public DbSet<Guild> Guilds => Set<Guild>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -57,6 +58,10 @@ namespace CommandPattern.Infrastructure
 
             modelBuilder.Entity<Theme>().HasData(
                 new Theme { Id = 1, Description = "Creatures of the same type", IsActive = true, Name = "Tribal" }
+            );
+
+            modelBuilder.Entity<Guild>().HasData(
+                new Guild { Id = 1, Description = "W U", IsActive = true, Name = "Azorius" }
             );
         }
     }
