@@ -12,6 +12,7 @@ namespace CommandPattern.Infrastructure
         public DbSet<ColorIdentity> ColorIdentities => Set<ColorIdentity>();
         public DbSet<Rarity> Rarities => Set<Rarity>();
         public DbSet<CardPurpose> CardPurposes => Set<CardPurpose>();
+        public DbSet<Theme> Themes => Set<Theme>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -52,6 +53,10 @@ namespace CommandPattern.Infrastructure
                 new CardPurpose { Id = 2, Description = "Creature Removal", IsActive = true, Name = "Creature Removal" },
                 new CardPurpose { Id = 3, Description = "Enchantment Removal", IsActive = true, Name = "Enchantment Removal" },
                 new CardPurpose { Id = 4, Description = "Artifact Removal", IsActive = true, Name = "Artifact Removal" }
+            );
+
+            modelBuilder.Entity<Theme>().HasData(
+                new Theme { Id = 1, Description = "Creatures of the same type", IsActive = true, Name = "Tribal" }
             );
         }
     }
