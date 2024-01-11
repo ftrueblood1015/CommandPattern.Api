@@ -20,7 +20,7 @@ namespace CommandPattern.BlazorServer.Pages.Mtg.Decks
         {
             if (EntityId == 0)
             {
-                return new Deck();
+                return new Deck() { WinRate = 0 };
             }
             else
             {

@@ -9,24 +9,36 @@
 
 <MudText @attributes='Splats.PageHeader("DeckDetail")'>Deck Detail</MudText>
 
-<MudForm @ref="Form" @bind-IsValid="@success">
-    <MudPaper Class="pa-4">
-        <EntityBaseFrom Entity="@Entity"></EntityBaseFrom>
-        <MudGrid>
-            <MudItem xs="12" md="12" lg="6">
-                <EntityBaseSelect TEntity="Format" Title="Format" BoundValue="Entity!.FormatId" HandleChange="FormatChange" DispalyFormat="Name"></EntityBaseSelect>
-            </MudItem>
-            <MudItem xs="12" md="12" lg="6">
-                <EntityBaseSelect TEntity="Guild" Title="Guild" BoundValue="Entity!.GuildId" HandleChange="GuildChange" DispalyFormat="NameDesc"></EntityBaseSelect>
-            </MudItem>
-            <MudItem xs="12" md="12" lg="6">
-                <EntityBaseSelect TEntity="Theme" Title="Theme" BoundValue="Entity!.ThemeId" HandleChange="ThemeChange" DispalyFormat="Name"></EntityBaseSelect>
-            </MudItem>
-        </MudGrid>
-    </MudPaper>
-    <MudPaper Class="pa-4">
-        <MudButton @attributes="Splats.NewButton()" OnClick="@(() => Save(Entity!, "decks"))">Save</MudButton>
-        <MudButton @attributes="Splats.ResetButton()" OnClick="@(()=>Form!.ResetAsync())" Class="mx-2">Reset</MudButton>
-        <MudButton @attributes="Splats.CancelButton()" OnClick="@(() => Cancel("decks"))">Cancel</MudButton>
-    </MudPaper>
-</MudForm>
+<MudGrid>
+    <MudItem xs="12" md="12" lg="8">
+        <MudForm @ref="Form" @bind-IsValid="@success">
+            <MudPaper Class="pa-4">
+                <EntityBaseFrom Entity="@Entity"></EntityBaseFrom>
+                <MudGrid>
+                    <MudItem xs="12" md="12" lg="6">
+                        <EntityBaseSelect TEntity="Format" Title="Format" BoundValue="Entity!.FormatId" HandleChange="FormatChange" DispalyFormat="Name"></EntityBaseSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="12" lg="6">
+                        <EntityBaseSelect TEntity="Guild" Title="Guild" BoundValue="Entity!.GuildId" HandleChange="GuildChange" DispalyFormat="NameDesc"></EntityBaseSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="12" lg="6">
+                        <EntityBaseSelect TEntity="Theme" Title="Theme" BoundValue="Entity!.ThemeId" HandleChange="ThemeChange" DispalyFormat="Name"></EntityBaseSelect>
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+            <MudPaper Class="pa-4">
+                <MudButton @attributes="Splats.NewButton()" OnClick="@(() => Save(Entity!, "decks"))">Save</MudButton>
+                <MudButton @attributes="Splats.ResetButton()" OnClick="@(()=>Form!.ResetAsync())" Class="mx-2">Reset</MudButton>
+                <MudButton @attributes="Splats.CancelButton()" OnClick="@(() => Cancel("decks"))">Cancel</MudButton>
+            </MudPaper>
+        </MudForm>
+    </MudItem>
+    @if (Entity != null && Entity.Id != 0)
+    {
+        <MudItem xs="12" md="12" lg="4">
+            <MudPaper Class="pa-4">
+                <MudText Typo="Typo.h4">Win %: @Entity!.WinRate</MudText>
+            </MudPaper>
+        </MudItem>
+    }
+</MudGrid>
