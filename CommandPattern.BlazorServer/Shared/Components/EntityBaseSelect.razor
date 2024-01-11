@@ -56,7 +56,7 @@
             throw new Exception($"{nameof(Service)}  is null!");
         }
         var Response = await Service.GetAllEntities();
-        Entities = Response != null ? Response.ToList() : new List<TEntity>();
+        Entities = Response != null ? Response.OrderBy(x => x.Name).ToList() : new List<TEntity>();
         StateHasChanged();
     }
 
