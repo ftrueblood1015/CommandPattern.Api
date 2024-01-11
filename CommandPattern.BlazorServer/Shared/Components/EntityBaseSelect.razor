@@ -7,7 +7,21 @@
     {
         @foreach (var entity in Entities)
         {
-            <MudSelectItem T="long?" Value="@entity.Id">@entity.Name</MudSelectItem>
+            @switch (DispalyFormat)
+            {
+                default:
+                    <MudSelectItem T="long?" Value="@entity.Id">@entity.Name</MudSelectItem>
+                    break;
+                case "Description":
+                    <MudSelectItem T="long?" Value="@entity.Id">@entity.Description</MudSelectItem>
+                    break;
+                case "NameDesc":
+                    <MudSelectItem T="long?" Value="@entity.Id">@entity.Name (@entity.Description)</MudSelectItem>
+                    break;
+                case "DescName":
+                    <MudSelectItem T="long?" Value="@entity.Id">@entity.Description (@entity.Name)</MudSelectItem>
+                    break;
+            }
         }
     }
 </MudSelect>
@@ -21,6 +35,9 @@
 
     [Parameter]
     public long? BoundValue { get; set; }
+
+    [Parameter]
+    public string? DispalyFormat { get; set; }
 
     [Parameter]
     public EventCallback<long?> HandleChange { get; set; }

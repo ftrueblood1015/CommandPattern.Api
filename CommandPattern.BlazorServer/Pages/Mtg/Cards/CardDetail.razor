@@ -14,19 +14,19 @@
         <EntityBaseFrom Entity="@Entity"></EntityBaseFrom>
         <MudGrid>
             <MudItem xs="12" md="12" lg="6">
-                <BaseEntitySelectByName TEntity="Set" Title="Set" BoundValue="Entity!.SetId" HandleChange="SetChange"></BaseEntitySelectByName>
+                <EntityBaseSelect TEntity="Set" Title="Set" BoundValue="Entity!.SetId" HandleChange="SetChange" DispalyFormat="Name"></EntityBaseSelect>
             </MudItem>
             <MudItem xs="12" md="12" lg="6">
-                <BaseEntitySelectByName TEntity="CardType" Title="Type" BoundValue="Entity!.CardTypeId" HandleChange="TypeChange"></BaseEntitySelectByName>
+                <EntityBaseSelect TEntity="CardType" Title="Type" BoundValue="Entity!.CardTypeId" HandleChange="TypeChange" DispalyFormat="Name"></EntityBaseSelect>
             </MudItem>
             <MudItem xs="12" md="12" lg="6">
-                <BaseEntitySelectByName TEntity="ColorIdentity" Title="Color" BoundValue="Entity!.ColorIdentityId" HandleChange="ColorChange"></BaseEntitySelectByName>
+                <EntityBaseSelect TEntity="ColorIdentity" Title="Color" BoundValue="Entity!.ColorIdentityId" HandleChange="ColorChange" DispalyFormat="NameDesc"></EntityBaseSelect>
             </MudItem>
             <MudItem xs="12" md="12" lg="6">
-                <BaseEntitySelectByName TEntity="Rarity" Title="Rarity" BoundValue="Entity!.RarityId" HandleChange="RarityChange"></BaseEntitySelectByName>
+                <EntityBaseSelect TEntity="Rarity" Title="Rarity" BoundValue="Entity!.RarityId" HandleChange="RarityChange" DispalyFormat="NameDesc"></EntityBaseSelect>
             </MudItem>
             <MudItem xs="12" md="12" lg="6">
-                <BaseEntitySelectByName TEntity="CardPurpose" Title="Main Purpose" BoundValue="Entity!.CardPurposeId" HandleChange="PurposeChange"></BaseEntitySelectByName>
+                <EntityBaseSelect TEntity="CardPurpose" Title="Main Purpose" BoundValue="Entity!.CardPurposeId" HandleChange="PurposeChange" DispalyFormat="Name"></EntityBaseSelect>
             </MudItem>
             <MudItem xs="12" md="12" lg="6">
                 <MudNumericField @bind-Value="@Entity!.ConvertedManaCost" @attributes='Splats.NumericRequired("ConvertedManaCost")' />
