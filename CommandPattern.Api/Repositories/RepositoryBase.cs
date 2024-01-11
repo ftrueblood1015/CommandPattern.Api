@@ -8,7 +8,7 @@ namespace CommandPattern.Api.Repositories
         where T : class, IEntityBase
         where TContext : DbContext
     {
-        private DbContext Context { get; }
+        protected DbContext Context { get; }
 
         public RepositoryBase(DbContext context)
         {

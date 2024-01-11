@@ -1,0 +1,50 @@
+﻿@using CommandPattern.BlazorServer.Services;
+@using CommandPattern.Domain.Entities;
+@typeparam TEntity where TEntity : EntityBase
+
+<MudSelect @attributes="Splats.SelectRequired(Title!)" T="long?" Label="@Title" ValueChanged="value => EntityValueChanged(value)" Value="@BoundValue">
+    @if (Entities != null)
+    {
+        @foreach (var entity in Entities)
+        {
+            <MudSelectItem T="long?" Value="@entity.Id">@entity.Name</MudSelectItem>
+        }
+    }
+</MudSelect>
+
+@code {
+    [Inject]
+    private IServiceBase<TEntity>? Service { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public long? BoundValue { get; set; }
+
+    [Parameter]
+    public EventCallback<long?> HandleChange { get; set; }
+
+    public List<TEntity>? Entities { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetData();
+    }
+
+    public async void GetData()
+    {
+        if (Service == null)
+        {
+            throw new Exception($"{nameof(Service)}  is null!");
+        }
+        var Response = await Service.GetAllEntities();
+        Entities = Response != null ? Response.ToList() : new List<TEntity>();
+        StateHasChanged();
+    }
+
+    public void EntityValueChanged(long? value)
+    {
+        HandleChange.InvokeAsync(value);
+    }
+}

@@ -1,0 +1,41 @@
+﻿@page "/card"
+@page "/card/{EntityId:int}"
+
+@using CommandPattern.BlazorServer.Shared.Components;
+@using CommandPattern.BlazorServer.Shared;
+@using CommandPattern.Domain.Entities.Mtg;
+
+@inherits DetailPageBase<Card>;
+
+<MudText @attributes='Splats.PageHeader("CardDetail")'>Card Detail</MudText>
+
+<MudForm @ref="Form" @bind-IsValid="@success">
+    <MudPaper Class="pa-4">
+        <EntityBaseFrom Entity="@Entity"></EntityBaseFrom>
+        <MudGrid>
+            <MudItem xs="12" md="12" lg="6">
+                <BaseEntitySelectByName TEntity="Set" Title="Set" BoundValue="Entity!.SetId" HandleChange="SetChange"></BaseEntitySelectByName>
+            </MudItem>
+            <MudItem xs="12" md="12" lg="6">
+                <BaseEntitySelectByName TEntity="CardType" Title="Type" BoundValue="Entity!.CardTypeId" HandleChange="TypeChange"></BaseEntitySelectByName>
+            </MudItem>
+            <MudItem xs="12" md="12" lg="6">
+                <BaseEntitySelectByName TEntity="ColorIdentity" Title="Color" BoundValue="Entity!.ColorIdentityId" HandleChange="ColorChange"></BaseEntitySelectByName>
+            </MudItem>
+            <MudItem xs="12" md="12" lg="6">
+                <BaseEntitySelectByName TEntity="Rarity" Title="Rarity" BoundValue="Entity!.RarityId" HandleChange="RarityChange"></BaseEntitySelectByName>
+            </MudItem>
+            <MudItem xs="12" md="12" lg="6">
+                <BaseEntitySelectByName TEntity="CardPurpose" Title="Main Purpose" BoundValue="Entity!.CardPurposeId" HandleChange="PurposeChange"></BaseEntitySelectByName>
+            </MudItem>
+            <MudItem xs="12" md="12" lg="6">
+                <MudNumericField @bind-Value="@Entity!.ConvertedManaCost" @attributes='Splats.NumericRequired("ConvertedManaCost")' />
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+    <MudPaper Class="pa-4">
+        <MudButton @attributes="Splats.NewButton()" OnClick="@(() => Save(Entity!, "cards"))">Save</MudButton>
+        <MudButton @attributes="Splats.ResetButton()" OnClick="@(()=>Form!.ResetAsync())" Class="mx-2">Reset</MudButton>
+        <MudButton @attributes="Splats.CancelButton()" OnClick="@(() => Cancel("cards"))">Cancel</MudButton>
+    </MudPaper>
+</MudForm>

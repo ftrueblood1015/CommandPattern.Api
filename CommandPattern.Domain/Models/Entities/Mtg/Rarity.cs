@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CommandPattern.Domain.Models.Entities.Mtg
 {
-    internal class Rarity : EntityModelBase
+    public class Rarity : EntityModelBase
     {
     }
 }

@@ -1,0 +1,39 @@
+﻿@page "/cards"
+
+@using CommandPattern.BlazorServer.Shared.Components;
+@using CommandPattern.BlazorServer.Shared;
+@using CommandPattern.Domain.Entities.Mtg;
+
+@inherits SummaryPageBase<Card>;
+
+<MudText @attributes='Splats.PageHeader("Card")'>Card Summary</MudText>
+
+<MudDataGrid @attributes='Splats.DataGrid("CardSummary")' T="Card" MultiSelection="true" Items="Entities" SortMode="SortMode.Multiple"
+             Filterable="true" QuickFilter="@_quickFilter">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudTextField @attributes='Splats.SearchField()' @bind-Value="_searchString" Class="mt-0"></MudTextField>
+        <MudButton @attributes="Splats.NewButton()" class="ml-2" OnClick="@(() => Add(DetailRoute))">Add</MudButton>
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Name" Title="Name" Sortable="false" Filterable="false" />
+        <PropertyColumn Property="x => x.ConvertedManaCost" Title="CMC" />
+        <PropertyColumn Property="x => x.Set!.Name" Title="Set" />
+        <PropertyColumn Property="x => x.CardType!.Name" Title="Type" />
+        <PropertyColumn Property="x => x.ColorIdentity!.Name" Title="Color" />
+        <PropertyColumn Property="x => x.Rarity!.Name" Title="Rarity" />
+        <PropertyColumn Property="x => x.CardPurpose!.Name" Title="Purpose" />
+        <PropertyColumn Property="x => x.IsActive" Title="Active?" />
+        <TemplateColumn CellClass="d-flex justify-end">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudButton @attributes="Splats.DeleteButton()" Size="@Size.Small" OnClick="@(() => OnDeleteClicked(context.Item))">Delete</MudButton>
+                    <MudButton @attributes="Splats.EditButton()" Size="@Size.Small" OnClick="@(() => Edit(context.Item, DetailRoute))">Edit</MudButton>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="Card" />
+    </PagerContent>
+</MudDataGrid>

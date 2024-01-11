@@ -15,6 +15,7 @@ namespace CommandPattern.Infrastructure
         public DbSet<Theme> Themes => Set<Theme>();
         public DbSet<Guild> Guilds => Set<Guild>();
         public DbSet<Format> Formats => Set<Format>();
+        public DbSet<Card> Cards => Set<Card>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -67,6 +68,10 @@ namespace CommandPattern.Infrastructure
 
             modelBuilder.Entity<Format>().HasData(
                 new Format { Id = 1, Description = "Commander", IsActive = true, Name = "Commander" }
+            );
+
+            modelBuilder.Entity<Card>().HasData(
+                new Card { Id = 1, Description = "Black Lotus", IsActive = true, Name = "Black Lotus", CardPurposeId = 1, CardTypeId = 4, ColorIdentityId = 6, RarityId = 3, SetId = 1, ConvertedManaCost = 0 }
             );
         }
     }
