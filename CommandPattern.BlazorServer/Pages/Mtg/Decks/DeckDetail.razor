@@ -10,7 +10,7 @@
 <MudText @attributes='Splats.PageHeader("DeckDetail")'>Deck Detail</MudText>
 
 <MudGrid>
-    <MudItem xs="12" md="12" lg="8">
+    <MudItem xs="12" md="12" lg="12">
         <MudForm @ref="Form" @bind-IsValid="@success">
             <MudPaper Class="pa-4">
                 <EntityBaseFrom Entity="@Entity"></EntityBaseFrom>
@@ -35,9 +35,46 @@
     </MudItem>
     @if (Entity != null && Entity.Id != 0)
     {
-        <MudItem xs="12" md="12" lg="4">
+        <MudItem xs="12" md="12" lg="6">
             <MudPaper Class="pa-4">
                 <MudText Typo="Typo.h4">Win %: @Entity!.WinRate</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" md="12" lg="6">
+            <MudPaper Class="pa-4">
+                <MudText @attributes='Splats.PageHeader("DeckCardSummary")'>Card Summary</MudText>
+                <MudDataGrid @attributes='Splats.DataGrid("DeckCardSummary")' T="DeckCard" MultiSelection="true" Items="DeckCards" SortMode="SortMode.Multiple"
+                             Filterable="true">
+                    <ToolBarContent>
+                        <MudForm @ref="DeckCardForm" @bind-IsValid="@success">
+                            <MudGrid>
+                                <MudItem>
+                                    <EntityBaseSelect TEntity="Card" Title="Card" BoundValue="DeckCard!.CardId" HandleChange="DeckCardChange" DispalyFormat="Name"></EntityBaseSelect>
+                                </MudItem>
+                                <MudItem>
+                                    <MudNumericField @bind-Value="@DeckCard!.Quantity" @attributes='Splats.NumericRequired("Quantity")' />
+                                </MudItem>
+                                <MudItem>
+                                    <MudButton @attributes="Splats.NewButton()" OnClick="@(() => SaveDeckCard(DeckCard!))">Add</MudButton>
+                                </MudItem>
+                            </MudGrid>
+                        </MudForm>
+                    </ToolBarContent>
+                    <Columns>
+                        <PropertyColumn Property="x => x.Card!.Name" Title="Name" Sortable="false" Filterable="false" />
+                        <PropertyColumn Property="x => x.Quantity" Title="Quantity" />
+                        <TemplateColumn CellClass="d-flex justify-end">
+                            <CellTemplate>
+                                <MudStack Row>
+                                <MudButton @attributes="Splats.DeleteButton()" Size="@Size.Small" OnClick="@(() => RemoveDeckCard(context.Item))">Remove</MudButton>
+                            </MudStack>
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+                <PagerContent>
+                    <MudDataGridPager T="DeckCard" />
+                </PagerContent>
+            </MudDataGrid>
             </MudPaper>
         </MudItem>
     }

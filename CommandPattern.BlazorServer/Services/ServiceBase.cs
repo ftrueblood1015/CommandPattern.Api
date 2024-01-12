@@ -5,8 +5,8 @@ namespace CommandPattern.BlazorServer.Services
 {
     public class ServiceBase<T> : IServiceBase<T> where T : class
     {
-        private readonly ApiServerClient ApiServerClient;
-        private readonly string ControllerName;
+        protected readonly ApiServerClient ApiServerClient;
+        protected readonly string ControllerName;
 
         public ServiceBase(ApiServerClient apiServerClient, string controllerName)
         {

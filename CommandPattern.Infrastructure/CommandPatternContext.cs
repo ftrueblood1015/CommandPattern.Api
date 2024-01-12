@@ -17,6 +17,7 @@ namespace CommandPattern.Infrastructure
         public DbSet<Format> Formats => Set<Format>();
         public DbSet<Card> Cards => Set<Card>();
         public DbSet<Deck> Decks => Set<Deck>();
+        public DbSet<DeckCard> DeckCards => Set<DeckCard>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +78,10 @@ namespace CommandPattern.Infrastructure
 
             modelBuilder.Entity<Deck>().HasData(
                 new Deck { Id = 1, Description = "Sliver Tribal", IsActive = true, Name = "Slivers!", FormatId = 1, GuildId = 1, ThemeId = 1, WinRate = 0 }
+            );
+
+            modelBuilder.Entity<DeckCard>().HasData(
+                new DeckCard { Id = 1, Description = "Black Lotus", IsActive = true, Name = "Black Lotus", CardId = 1, DeckId = 1, Quantity = 1 }
             );
         }
     }
