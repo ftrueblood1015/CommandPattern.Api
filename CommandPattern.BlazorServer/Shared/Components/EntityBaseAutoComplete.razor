@@ -1,0 +1,95 @@
+﻿@using CommandPattern.BlazorServer.Services;
+@using CommandPattern.Domain.Entities;
+@typeparam TEntity where TEntity : EntityBase
+
+<MudAutocomplete @attributes="Splats.AutoCompleteRequired(Title!)" T="TEntity" Label="@Title" SearchFunc="@Search" ToStringFunc=DisplayValue
+                 ValueChanged="value => EntityValueChanged(value)" Value="@BoundValue" />
+
+@code {
+    [Inject]
+    private IServiceBase<TEntity>? Service { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public string? DispalyFormat { get; set; }
+
+    [Parameter]
+    public TEntity? BoundValue { get; set; }
+
+    [Parameter]
+    public EventCallback<TEntity?> HandleChange { get; set; }
+
+    [Parameter]
+    public long? EntityId { get; set; }
+    private long? _entityId { get; set;}
+
+    [Parameter]
+    public EventCallback<long> EntityIdChanged { get; set; }
+
+    public List<TEntity>? Entities { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetData();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await SetEntity();
+    }
+
+    private async Task SetEntity()
+    {
+        if (EntityId != null && Entities != null && _entityId != EntityId)
+        {
+            _entityId = EntityId;
+            BoundValue = Entities!.FirstOrDefault(x => x.Id == EntityId);
+        }
+    }
+
+    public async void GetData()
+    {
+        if (Service == null)
+        {
+            throw new Exception($"{nameof(Service)}  is null!");
+        }
+        var Response = await Service.GetAllEntities();
+        Entities = Response != null ? Response.OrderBy(x => x.Name).ToList() : new List<TEntity>();
+        await SetEntity();
+        StateHasChanged();
+    }
+
+    private async Task<IEnumerable<TEntity>> Search(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return Entities;
+        return Entities.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    public void EntityValueChanged(TEntity? value)
+    {
+        HandleChange.InvokeAsync(value);
+    }
+
+    private string DisplayValue(TEntity entity)
+    {
+        if (entity == null)
+        {
+            return String.Empty;
+        }
+
+        switch (DispalyFormat)
+        {
+            default:
+                return entity.Name!;
+            case "Description":
+                return entity.Description!;
+            case "NameDesc":
+                return $"{entity.Name!} ({entity.Description!})";
+            case "DescName":
+                return $"{entity.Description!} ({entity.Name!})";
+        }
+    }
+}

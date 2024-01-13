@@ -28,9 +28,13 @@ namespace CommandPattern.BlazorServer.Pages.Mtg.Cards
             }
         }
 
-        public async Task SetChange(long? Id)
+        public async Task SetChange(Set? set)
         {
-            Entity!.SetId = (long)Id!;
+            if(set != null)
+            {
+                Entity!.SetId = set!.Id;
+                Entity!.Set = set;
+            }
         }
 
         public async Task TypeChange(long? Id)
@@ -51,6 +55,12 @@ namespace CommandPattern.BlazorServer.Pages.Mtg.Cards
         public async Task PurposeChange(long? Id)
         {
             Entity!.CardPurposeId = (long)Id!;
+        }
+
+        public override void Create(Card Entity)
+        {
+            Entity.Set = null;
+            base.Create(Entity);
         }
     }
 }

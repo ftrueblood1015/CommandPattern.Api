@@ -55,7 +55,7 @@ namespace CommandPattern.BlazorServer.Shared.Components
             Cancel(route);
         }
 
-        private void Create(T Entity)
+        public virtual void Create(T Entity)
         {
             try
             {

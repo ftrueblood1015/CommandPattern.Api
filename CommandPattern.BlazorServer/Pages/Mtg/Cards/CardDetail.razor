@@ -14,7 +14,7 @@
         <EntityBaseFrom Entity="@Entity"></EntityBaseFrom>
         <MudGrid>
             <MudItem xs="12" md="12" lg="6">
-                <EntityBaseSelect TEntity="Set" Title="Set" BoundValue="Entity!.SetId" HandleChange="SetChange" DispalyFormat="Name"></EntityBaseSelect>
+                <EntityBaseAutoComplete TEntity="Set" Title="Set" DispalyFormat="Name" BoundValue="Entity!.Set" HandleChange="SetChange" @bind-EntityId="@Entity.SetId"></EntityBaseAutoComplete>
             </MudItem>
             <MudItem xs="12" md="12" lg="6">
                 <EntityBaseSelect TEntity="CardType" Title="Type" BoundValue="Entity!.CardTypeId" HandleChange="TypeChange" DispalyFormat="Name"></EntityBaseSelect>

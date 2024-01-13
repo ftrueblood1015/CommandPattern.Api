@@ -1,9 +1,26 @@
-﻿using System.Globalization;
+﻿using MudBlazor;
+using System.Globalization;
 
 namespace CommandPattern.BlazorServer.Shared
 {
     public class Splats
     {
+        public static Dictionary<string, object> AutoCompleteRequired(string label)
+        {
+            Dictionary<string, object> attributes = new ()
+            {
+                { "id", $"autocomplete_{GenerateId(label)}" },
+                { "Variant", MudBlazor.Variant.Outlined },
+                { "Required", true },
+                { "RequiredError", $"{label} is required." },
+                { "ResetValueOnEmptyText", true },
+                { "CoerceText", true },
+                { "CoerceValue", true },
+            };
+
+            return attributes;
+        }
+
         public static Dictionary<string, object> CancelButton()
         {
             Dictionary<string, object> attributes = new ()
@@ -191,6 +208,7 @@ namespace CommandPattern.BlazorServer.Shared
                 { "Variant", MudBlazor.Variant.Outlined },
                 { "Required", true },
                 { "RequiredError", $"{label} is required." },
+                { "AnchorOrigin", Origin.BottomCenter },
             };
 
             return attributes;
