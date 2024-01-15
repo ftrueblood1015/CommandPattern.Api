@@ -5,5 +5,7 @@ namespace CommandPattern.BlazorServer.Services.Mtg.DeckCards
     public interface IDeckCardService : IServiceBase<DeckCard>
     {
         Task<IEnumerable<DeckCard>?> GetAllEntitiesFiltered(long id);
+
+        Task<IEnumerable<CommandPattern.Domain.Models.Entities.Mtg.DeckCardTypeStats>?> GetCardPurposeStatistics(long id);
     }
 }

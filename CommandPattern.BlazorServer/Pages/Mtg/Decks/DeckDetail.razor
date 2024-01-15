@@ -40,9 +40,7 @@
             <DeckCardDataGrid @bind-DeckId="EntityId"></DeckCardDataGrid>
         </MudItem>
         <MudItem xs="12" md="12" lg="6">
-            <MudPaper Class="pa-4">
-                <MudText Typo="Typo.h4">Win %: @Entity!.WinRate</MudText>
-            </MudPaper>
+            <CardPurposeStats @bind-DeckId="EntityId"></CardPurposeStats>
         </MudItem>
     }
 </MudGrid>

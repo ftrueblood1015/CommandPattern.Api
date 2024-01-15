@@ -17,7 +17,7 @@ namespace CommandPattern.Api.Repositories.Mtg.DeckCards
 
         public override IEnumerable<DeckCard> Filter(Func<DeckCard, bool> predicate)
         {
-            return Context.Set<DeckCard>().Include(c => c.Card).AsNoTracking().Where(predicate);
+            return Context.Set<DeckCard>().Include(c => c.Card).Include(p => p.Card!.CardPurpose).AsNoTracking().Where(predicate);
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿<MudPaper Class="pa-4">
+    <MudText @attributes='Splats.PageHeader("CardPurposeSummary")'>Purpose Stats</MudText>
+    <MudDataGrid @attributes='Splats.DataGrid("CardPurposeSummary")'
+                 T="CommandPattern.Domain.Models.Entities.Mtg.DeckCardTypeStats" MultiSelection="true" Items="DeckCardStats" SortMode="SortMode.Multiple"
+                 Filterable="true">
+        <Columns>
+            <PropertyColumn Property="x => x.DisplayName" Title="Purpose" Sortable="false" Filterable="false" />
+            <PropertyColumn Property="x => x.Percentage" Title="Percentage" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="CommandPattern.Domain.Models.Entities.Mtg.DeckCardTypeStats" />
+        </PagerContent>
+    </MudDataGrid>
+</MudPaper>

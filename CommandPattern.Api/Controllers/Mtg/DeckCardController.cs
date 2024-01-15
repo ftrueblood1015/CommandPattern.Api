@@ -16,5 +16,12 @@ namespace CommandPattern.Api.Controllers.Mtg
             var result = Service.Filter(x => x.DeckId == id);
             return Ok(result);
         }
+
+        [HttpPost("cardPurposeStatistics/{id}")]
+        public ActionResult<string?> CardPurposeStatistics(long id)
+        {
+            var result = Service.GetCardPurposeStats(id);
+            return Ok(result);
+        }
     }
 }

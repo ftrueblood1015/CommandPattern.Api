@@ -18,5 +18,14 @@ namespace CommandPattern.BlazorServer.Services.Mtg.DeckCards
 
             return await response.GetData<IEnumerable<DeckCard>>();
         }
+
+        public async Task<IEnumerable<Domain.Models.Entities.Mtg.DeckCardTypeStats>?> GetCardPurposeStatistics(long id)
+        {
+            using var TJson = new StringContent(JsonSerializer.Serialize(""), Encoding.UTF8, "application/json");
+            var url = new Uri($"{ControllerName}/cardPurposeStatistics/{id}", UriKind.Relative);
+            var response = await this.ApiServerClient.Client.PostAsync(url, TJson);
+
+            return await response.GetData<IEnumerable<Domain.Models.Entities.Mtg.DeckCardTypeStats>>();
+        }
     }
 }
