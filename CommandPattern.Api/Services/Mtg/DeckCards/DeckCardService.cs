@@ -10,6 +10,35 @@ namespace CommandPattern.Api.Services.Mtg.DeckCards
         {
         }
 
+        public Domain.Models.Entities.Mtg.CMCBarChartData GetDeckCMCChartData(long DeckId)
+        {
+            var DeckCards = Repo.Filter(d => d.DeckId == DeckId && !d.Card!.CardType!.Name!.Contains("Land"));
+            int TotalCards = DeckCards.Sum(x => x.Quantity);
+
+            if (TotalCards <= 0)
+            {
+                return new Domain.Models.Entities.Mtg.CMCBarChartData("EMPTY");
+            }
+
+            var Name = DeckCards.First().Deck!.Name;
+            var CMCData = new Domain.Models.Entities.Mtg.CMCBarChartData($"{Name!} Mana Curve");
+
+            int MaxCMC = Math.Max((int)DeckCards.Max(x => x.Card!.ConvertedManaCost)!, 16);
+
+            for (int i = 0; i <= MaxCMC; i++)
+            {
+                CMCData.XAxisLabels.Add(i.ToString());
+            }
+
+            foreach(var cmcData in CMCData.XAxisLabels)
+            {
+                int totalCards = DeckCards.Where(x => x.Card!.ConvertedManaCost == Int32.Parse(cmcData)).Sum(x => x.Quantity);
+                CMCData.Data.Add(totalCards);
+            }
+
+            return CMCData;
+        }
+
         IEnumerable<Domain.Models.Entities.Mtg.DeckCardTypeStats> IDeckCardService.GetCardPurposeStats(long DeckId)
         {
             var DeckCards = Repo.Filter(d => d.DeckId == DeckId);

@@ -27,5 +27,14 @@ namespace CommandPattern.BlazorServer.Services.Mtg.DeckCards
 
             return await response.GetData<IEnumerable<Domain.Models.Entities.Mtg.DeckCardTypeStats>>();
         }
+
+        public async Task<Domain.Models.Entities.Mtg.CMCBarChartData?> GetCMCDeckData(long id)
+        {
+            using var TJson = new StringContent(JsonSerializer.Serialize(""), Encoding.UTF8, "application/json");
+            var url = new Uri($"{ControllerName}/cmcDeckData/{id}", UriKind.Relative);
+            var response = await this.ApiServerClient.Client.PostAsync(url, TJson);
+
+            return await response.GetData<Domain.Models.Entities.Mtg.CMCBarChartData>();
+        }
     }
 }

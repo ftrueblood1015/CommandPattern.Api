@@ -7,5 +7,7 @@ namespace CommandPattern.BlazorServer.Services.Mtg.DeckCards
         Task<IEnumerable<DeckCard>?> GetAllEntitiesFiltered(long id);
 
         Task<IEnumerable<CommandPattern.Domain.Models.Entities.Mtg.DeckCardTypeStats>?> GetCardPurposeStatistics(long id);
+
+        Task<CommandPattern.Domain.Models.Entities.Mtg.CMCBarChartData?> GetCMCDeckData(long id);
     }
 }

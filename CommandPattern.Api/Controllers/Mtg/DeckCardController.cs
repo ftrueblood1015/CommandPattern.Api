@@ -23,5 +23,12 @@ namespace CommandPattern.Api.Controllers.Mtg
             var result = Service.GetCardPurposeStats(id);
             return Ok(result);
         }
+
+        [HttpPost("cmcDeckData/{id}")]
+        public ActionResult<string?> GetDeckCMCData(long id)
+        {
+            var result = Service.GetDeckCMCChartData(id);
+            return Ok(result);
+        }
     }
 }
